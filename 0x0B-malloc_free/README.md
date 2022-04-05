@@ -1,10 +1,10 @@
-(H1)**Malloc and Free for Memory Allocation in C** 
+(H1) **Malloc and Free for Memory Allocation in C** 
 
-(H3)Description 
+(H3) Description 
 
 Introduction to Dynamnic Memory Allocation in C
 
-.gitignore to ignore pushing unecessary files to the directory.
+[.gitignore](.gitignore) to ignore pushing unecessary files to the directory.
 
 File 0-create_array.c is a function that creates an array of charts, and initializes it with a specific char.
 
