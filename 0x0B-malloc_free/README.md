@@ -1,6 +1,6 @@
-**Malloc and Free for Memory Allocation in C** (H1)
+(H1)**Malloc and Free for Memory Allocation in C** 
 
-Description (H3)
+(H3)Description 
 
 Introduction to Dynamnic Memory Allocation in C
 
