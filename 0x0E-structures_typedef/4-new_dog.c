@@ -1,60 +1,67 @@
-#include "dog.h"
 #include <stdlib.h>
-
+#include "dog.h"
 /**
- * new_dog - new element of type struct dog
- *
- * @name: name of new dog
- * @age: age of new dog
- * @owner: owner of new dog
- * Return: new struct dog
+ * _strdup - returns a pointer to a newly allocated space in memory,
+ * which contains a copy of the string given as a parameter.
+ * @str: The string to copy
+ * Return: a pointer to the duplicated string, NULL if insufficient memory
+ * or if @str is NULL
+ */
+char *_strdup(char *str)
+{
+	char *ar;
+	unsigned int i = 0;
+	unsigned int j = 0;
+
+	if (str == NULL)
+		return (NULL);
+	while (str[i])
+		i++;
+	ar = malloc(sizeof(char) * (i + 1));
+	if (ar == NULL)
+		return (NULL);
+	while (str[j])
+	{
+		ar[j] = str[j];
+		j++;
+	}
+	ar[j] = 0;
+	return (ar);
+}
+/**
+ * new_dog - creates a new dog
+ * @name: name of dog
+ * @age: age of dog
+ * @owner: owner of dog
+ * Return: NULL if function fails
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_dog;
-	char *dog_name, *dog_owner;
+	dog_t *new;
+	char *ncpy;
+	char *ocpy;
 
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL)
-		return (new_dog);
-	dog_name = malloc(sizeof(name));
-		if (dog_name == NULL)
-		{
-			free(new_dog);
-			return (NULL);
-		}
-	dog_owner = malloc(sizeof(owner));
-	if (dog_owner == NULL)
+	new = malloc(sizeof(dog_t));
+	if (new == NULL)
+		return (NULL);
+
+	ncpy = _strdup(name);
+	if (!ncpy && name)
 	{
-		free(dog_name);
-		free(new_dog);
+		free(new);
 		return (NULL);
 	}
-	_strcpy(dog_name, name);
-	_strcpy(dog_owner, owner);
-	new_dog->name = dog_name;
-	new_dog->owner = dog_owner;
-	new_dog->age = age;
-	return (new_dog);
-}
-
-/**
- * *_strcpy - copies string to given memory location
- * @dest: where the string needs to be copied
- * @src: where the string is
- *
- * Return: char
- */
-char *_strcpy(char *dest, char *src)
-{
-	int len = 0;
-
-	while (*(src + len) != '\0')
+	ocpy = _strdup(owner);
+	if (!ocpy && owner)
 	{
-		*(dest + len) = *(src + len);
-		len++;
+		free(ncpy);
+		free(new);
+		return (NULL);
 	}
-	*(dest + len) = *(src + len);
 
-	return (dest);
+	new->name = ncpy;
+	new->age = age;
+	new->owner = ocpy;
+
+	return (new);
 }
